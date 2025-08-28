@@ -1,3 +1,4 @@
+import { createSession } from "@/business-logic/lib/session";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
@@ -20,6 +21,9 @@ export async function POST(req: NextRequest) {
     if (!isPasswordValid) {
       return NextResponse.json({ error: "Invalid password" }, { status: 401 });
     }
+
+    // Create a session for the user
+    await createSession(user.id);
 
     const { password: _, ...userWithoutPassword } = user;
     return NextResponse.json({ user: userWithoutPassword });
