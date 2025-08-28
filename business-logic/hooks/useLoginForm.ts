@@ -1,46 +1,39 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function useSignUpForm() {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
+export default function useLoginForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
+  const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     try {
-      const res = await fetch("/api/signup", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, firstName, lastName }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
-
       if (res.ok) {
-        setSuccess("User created successfully!");
+        setSuccess("Connexion réussie");
         setEmail("");
         setPassword("");
-        setFirstName("");
-        setLastName("");
+
+        router.push("/dashboard");
       } else {
         setError(data.error || "Something went wrong");
       }
     } catch (error) {
-      setError("Erreur lors de la création de compte. Veuillez réessayer");
+      setError("Erreur lors de la connexion");
     }
-  };
+  }
 
   return {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
     email,
     setEmail,
     password,

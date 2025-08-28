@@ -1,5 +1,6 @@
 "use client";
 
+import useLoginForm from "@/business-logic/hooks/useLoginForm";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import {
@@ -15,6 +16,16 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    success,
+    handleSubmit,
+  } = useLoginForm();
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -25,13 +36,24 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
-              <LabelInput label="Email" id="email" type="email" required />
+              <LabelInput
+                label="Email"
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
               <LabelInput
                 label="Mot de passe"
                 id="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               >
                 <a

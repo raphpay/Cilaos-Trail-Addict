@@ -2,8 +2,6 @@
 
 import { LoginForm } from "@/components/login-form";
 
-export interface ILoginProps {}
-
 export default function Login() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
