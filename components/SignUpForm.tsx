@@ -11,7 +11,7 @@ import {
 } from "./card";
 import LabelInput from "./InputLabel";
 
-export function LoginForm({
+export function SignUpForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -19,31 +19,45 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Connectez vous à votre compte Admin</CardTitle>
+          <CardTitle>Inscription</CardTitle>
           <CardDescription>
-            Entrez votre email ci-dessous pour vous connecter à votre compte
+            Entrez vos informations ci-dessous pour vous inscrire
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <div className="flex flex-col gap-6">
-              <LabelInput label="Email" id="email" type="email" required />
+              <LabelInput
+                label="Nom"
+                id="name"
+                placeholder="César"
+                type="text"
+                required
+              />
+              <LabelInput
+                label="Prénom"
+                id="firstname"
+                placeholder="Jules"
+                type="text"
+                required
+              />
+              <LabelInput
+                label="Email"
+                id="email"
+                placeholder="jules@rome.com"
+                type="email"
+                required
+              />
               <LabelInput
                 label="Mot de passe"
                 id="password"
                 type="password"
                 required
-              >
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Mot de passe oublié ?
-                </a>
-              </LabelInput>
+              />
+
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full">
-                  Connexion
+                  Inscription
                 </Button>
                 {/* <Button variant="outline" className="w-full">
                   Login with Google
@@ -51,9 +65,9 @@ export function LoginForm({
               </div>
             </div>
             <div className="mt-4 text-center text-sm">
-              Pas encore de compte ?{" "}
-              <a href="/signup" className="underline underline-offset-4">
-                Créer un compte
+              Déjà enregistré ?{" "}
+              <a href="/login" className="underline underline-offset-4">
+                Se connecter
               </a>
             </div>
           </form>
