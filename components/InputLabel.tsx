@@ -3,21 +3,25 @@ import { Input } from "./input";
 import { Label } from "./label";
 
 export interface ILabelInputProps {
-  label: string;
   id: string;
+  value: string;
+  label: string;
   type?: HTMLInputTypeAttribute | undefined;
   placeholder?: string;
   required?: boolean;
   children?: React.ReactNode;
+  onChange: (e: any) => void;
 }
 
 export default function LabelInput({
-  label,
   id,
+  label,
+  value,
   type,
   placeholder,
   required,
   children,
+  onChange,
 }: ILabelInputProps) {
   return (
     <>
@@ -32,6 +36,8 @@ export default function LabelInput({
             type={type}
             placeholder={placeholder}
             required={required}
+            value={value}
+            onChange={onChange}
           />
         </div>
       ) : (
@@ -42,6 +48,8 @@ export default function LabelInput({
             type={type}
             placeholder={placeholder}
             required={required}
+            value={value}
+            onChange={onChange}
           />
         </div>
       )}
