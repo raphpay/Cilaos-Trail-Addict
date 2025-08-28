@@ -1,6 +1,9 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function useSignUpForm() {
+  const router = useRouter();
+
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -23,7 +26,9 @@ export default function useSignUpForm() {
       const data = await res.json();
 
       if (res.ok) {
-        setSuccess("User created successfully!");
+        setSuccess(
+          "Compte créé ! Vous allez être redirigé pour vous connecter."
+        );
         setEmail("");
         setPassword("");
         setFirstName("");
@@ -31,6 +36,11 @@ export default function useSignUpForm() {
       } else {
         setError(data.error || "Something went wrong");
       }
+
+      setTimeout(() => {
+        setSuccess("");
+        router.push("login");
+      }, 5000);
     } catch (error) {
       setError("Erreur lors de la création de compte. Veuillez réessayer");
     }
