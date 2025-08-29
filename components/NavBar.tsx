@@ -28,7 +28,9 @@ function NavigationButton({
           </a>
         </li>
       </ul>
-      {verticalSeparator && <p className="text-neutral-400">|</p>}
+      {verticalSeparator && (
+        <p className="text-neutral-400 dark:text-neutral-200">|</p>
+      )}
       {horizontalSeparator && (
         <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent h-[1px] w-full" />
       )}
@@ -40,13 +42,10 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div className="fixed inset-x-0 z-20 w-full backdrop-blur-lg bg-white">
+    <div className="fixed inset-x-0 z-20 w-full backdrop-blur-lg">
       <div className="mx-2 my-2">
         <div className="flex items-center justify-between py-2 sm:py-0">
-          <a
-            href="/"
-            className="text-xl font-bold transition-colors text-neutral-400 hover:text-white"
-          >
+          <a href="/" className="text-xl font-bold transition-colors  ">
             <img
               src="/assets/Twinpaw-Logo.png"
               className="h-10 object-contain"
@@ -55,7 +54,7 @@ export default function NavBar() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
+            className="flex cursor-pointer   focus:outline-none sm:hidden"
           >
             {isOpen ? <X /> : <MenuIcon />}
           </button>
