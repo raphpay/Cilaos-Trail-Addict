@@ -1,8 +1,9 @@
 import { Race } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export default function useHome() {
-  // TODO: Use useQuery ?
+  const router = useRouter();
   async function fetchRaces() {
     try {
       const res = await fetch("/api/races");
@@ -16,6 +17,10 @@ export default function useHome() {
     }
   }
 
+  function goToRace(id: string) {
+    router.push(`/races/${id}`);
+  }
+
   const {
     error,
     isPending,
@@ -23,5 +28,5 @@ export default function useHome() {
     data: races,
   } = useQuery({ queryKey: ["races"], queryFn: fetchRaces });
 
-  return { races, isPending, isError, error };
+  return { races, isPending, isError, error, goToRace };
 }

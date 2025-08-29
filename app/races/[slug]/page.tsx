@@ -1,6 +1,7 @@
 "use client";
 
 import useRaceDetails from "@/business-logic/hooks/useRaceDetails";
+import { Button } from "@/components/button";
 import { useParams } from "next/navigation";
 
 export default function RaceDetailsPage() {
@@ -9,8 +10,11 @@ export default function RaceDetailsPage() {
 
   const { race, isLoading, isError } = useRaceDetails(slug);
 
-  if (isLoading) return <div className="centered">Loading...</div>;
-  if (isError) return <div className="centered">Error loading race</div>;
+  if (isLoading) return <div className="centered">Chargement...</div>;
+  if (isError)
+    return (
+      <div className="centered">Erreur lors du chargement de la course</div>
+    );
 
   return (
     <div className="font-sans min-h-screen p-8 sm:p-20">
@@ -22,6 +26,7 @@ export default function RaceDetailsPage() {
             Distance: {race.distance} km <br />
             Price: {race.price} €
           </p>
+          <Button>S'inscrire</Button>
         </>
       )}
     </div>
